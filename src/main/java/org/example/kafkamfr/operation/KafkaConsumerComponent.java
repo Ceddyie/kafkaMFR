@@ -1,5 +1,6 @@
 package org.example.kafkamfr.operation;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.kafkamfr.message.Message;
 import org.example.kafkamfr.message.content.MessageBody;
@@ -13,6 +14,9 @@ public class KafkaConsumerComponent {
     @Autowired
     private ObjectMapper mapper;
 
+    @Autowired
+    private KafkaProducerService producerService;
+
     @KafkaListener(topics = "mfr_message")
     public void listen(String message) {
         message = message.replace("\"", "");
@@ -24,5 +28,13 @@ public class KafkaConsumerComponent {
         Message messageObject = new Message(head, body);
 
         System.out.println(messageObject);
+
+        producerService.sendObject(messageObject);
+    }
+
+    @KafkaListener(topics = "mfr_object")
+    public void listenObject(String object) throws JsonProcessingException {
+        Message message = mapper.readValue(object, Message.class);
+        System.out.println(message);
     }
 }

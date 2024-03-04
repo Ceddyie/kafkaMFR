@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,14 +26,15 @@ public class Controller {
     @PostMapping("/sendMessage")
     public ResponseEntity<Map<String, String>> sendMessage(@RequestBody Message message) {
         MessageBody body = message.getBody();
-        body.setTimestamp(System.currentTimeMillis());
+        LocalDateTime dateTime = LocalDateTime.now();
+        body.setTimestamp(Long.parseLong(dateTime.format(DateTimeFormatter.ofPattern("yyyyMMddHHmm"))));
         message.setBody(body);
 
         String version = StringUtils.leftPad(String.valueOf(message.getHead().getVersion()), 2, "0");
         String identifier = message.getHead().getIdentifier();
         String mode = message.getHead().getMode();
 
-        String subsystem = message.getBody().getSubSystem();
+        String subsystem = message.getBody().getSubsystem();
         String timestamp = StringUtils.leftPad(String.valueOf(message.getBody().getTimestamp()), 12, "0");
 
         String telegramMessage = version + identifier + mode + subsystem + timestamp;
