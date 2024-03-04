@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 @Component
 public class KafkaConsumerComponent {
     @Autowired
@@ -29,12 +32,22 @@ public class KafkaConsumerComponent {
 
         System.out.println(messageObject);
 
-        producerService.sendObject(messageObject);
+        if (messageObject.getHead().getMode().equals("Q_")) {
+            LocalDateTime dateTime = LocalDateTime.now();
+            long time = Long.parseLong(dateTime.format(DateTimeFormatter.ofPattern("yyyyMMddHHmm")));
+            MessageHead responseHead = new MessageHead(0, "UZ", "I_");
+            MessageBody responseBody = new MessageBody("FT", time);
+            Message response = new Message(responseHead, responseBody);
+
+            producerService.sendObject(response);
+        } else {
+            System.out.println("No request");
+        }
     }
 
     @KafkaListener(topics = "mfr_object")
     public void listenObject(String object) throws JsonProcessingException {
-        Message message = mapper.readValue(object, Message.class);
-        System.out.println(message);
+        object = object.replace("\"", "");
+        System.out.println(object);
     }
 }
