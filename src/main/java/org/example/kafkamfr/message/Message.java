@@ -9,8 +9,6 @@ public class Message {
     private MessageHead head;
     private MessageBody body;
 
-    Message() {}
-
     public Message(MessageHead head, MessageBody body) {
         this.head= head;
         this.body= body;

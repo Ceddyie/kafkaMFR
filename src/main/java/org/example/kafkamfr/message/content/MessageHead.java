@@ -8,8 +8,6 @@ public class MessageHead {
     private String identifier;
     private String mode;
 
-    MessageHead(){}
-
     public MessageHead(int version, String identifier, String mode) {
         this.version = version;
         this.identifier = identifier;
