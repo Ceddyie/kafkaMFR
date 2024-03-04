@@ -10,9 +10,9 @@ public class KafkaProducerService {
     private static final String MFR_MESSAGE = "mfr_message";
 
     @Autowired
-    private KafkaTemplate<String, Object> kafkaTemplate;
+    private KafkaTemplate<String, String> kafkaTemplate;
 
-    public void sendMessage(Message message) {
+    public void sendMessage(String message) {
         kafkaTemplate.send(MFR_MESSAGE, message);
     }
 }

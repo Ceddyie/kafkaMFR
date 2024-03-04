@@ -9,7 +9,7 @@ public class MessageBody {
 
     MessageBody(){}
 
-    MessageBody(String subSystem, long timestamp) {
+    public MessageBody(String subSystem, long timestamp) {
         this.subSystem = subSystem;
         this.timestamp = timestamp;
     }

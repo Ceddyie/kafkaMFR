@@ -11,7 +11,7 @@ public class Message {
 
     Message() {}
 
-    Message(MessageHead messageHead, MessageBody messageBody) {
+    public Message(MessageHead messageHead, MessageBody messageBody) {
         this.head= messageHead;
         this.body= messageBody;
     }

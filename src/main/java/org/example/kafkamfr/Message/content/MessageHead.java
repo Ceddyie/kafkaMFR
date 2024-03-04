@@ -10,7 +10,7 @@ public class MessageHead {
 
     MessageHead(){}
 
-    MessageHead(int version, String identifier, String mode) {
+    public MessageHead(int version, String identifier, String mode) {
         this.version = version;
         this.identifier = identifier;
         this.mode = mode;
