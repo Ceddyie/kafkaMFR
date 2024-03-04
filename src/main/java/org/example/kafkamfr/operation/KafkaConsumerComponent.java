@@ -1,11 +1,9 @@
 package org.example.kafkamfr.operation;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.example.kafkamfr.Message.Message;
-import org.example.kafkamfr.Message.content.MessageBody;
-import org.example.kafkamfr.Message.content.MessageHead;
+import org.example.kafkamfr.message.Message;
+import org.example.kafkamfr.message.content.MessageBody;
+import org.example.kafkamfr.message.content.MessageHead;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;

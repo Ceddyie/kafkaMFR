@@ -1,4 +1,4 @@
-package org.example.kafkamfr.Message.content;
+package org.example.kafkamfr.message.content;
 
 import lombok.Data;
 
