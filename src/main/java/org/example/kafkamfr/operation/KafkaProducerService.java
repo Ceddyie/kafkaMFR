@@ -27,7 +27,7 @@ public class KafkaProducerService {
         String mode = response.getHead().getMode();
 
         String subsystem = response.getBody().getSubsystem();
-        String timestamp = StringUtils.leftPad(String.valueOf(response.getBody().getTimestamp()), 12, "0");
+        String timestamp = StringUtils.rightPad(String.valueOf(response.getBody().getTimestamp()), 12, "0");
 
         String telegramMessage = version + identifier + mode + subsystem + timestamp;
 
